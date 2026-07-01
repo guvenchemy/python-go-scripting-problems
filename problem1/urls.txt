@@ -1,0 +1,8 @@
+https://www.google.com
+https://github.com
+
+https://httpbin.org/status/404
+https://httpbin.org/status/503
+http://10.255.255.1
+https://bu-domain-kesinlikle-yok-12345.com
+   https://www.cloudflare.com
