@@ -1,9 +1,19 @@
 #!/bin/bash
 
 LOGDIR=/var/log/deneme/
+
 DATE=$(date +"%d-%m-%Y-%H-%M")
+
 FILE_SIZE_LIMIT=$((10*1024*1024))
-#LOGFILE=$(find $LOGDIR -maxdepth 1 -type f -name '*.log')
+
+ROTATOR_LOGDIR=/var/log/rotator/
+
+PROCESS_LOG="$ROTATOR_LOGDIR/rotator_process.log"
+
+mkdir -p "$ROTATOR_LOGDIR"
+
+# BU SATIRDAN SONRAKI tum ciktilari kalici log dosyasina yonlendiriyoruz 
+exec >> "$PROCESS_LOG" 2>&1
 
 for LOGFILE in $(find $LOGDIR -maxdepth 1 -type f -name '*.log'); do
     BASENAME=$(basename "$LOGFILE")
@@ -15,17 +25,19 @@ for LOGFILE in $(find $LOGDIR -maxdepth 1 -type f -name '*.log'); do
             echo "[UYARI]: DOSYA BOYUTU $FILESIZE 10MB'DEN BUYUK!"
             echo "${LOGFILE} yedegi aliniliyor..."
             tar -czvf ${LOGFILE}_${DATE}.tar.gz -C ${LOGDIR} ${BASENAME}
-            echo "Dosya basari ile sıkıştırıldı: ${LOGFILE}_${DATE}.tar.gz"
+            echo "Dosya basari ile sikistirildi: ${LOGFILE}_${DATE}.tar.gz"
             echo "${LOGFILE} temizleniyor..."
             #truncate islemi deniyor, acık dosyayı kapatmadan pid patlatmadan temiliyo 0 bayt yapıyo icerigini.
             > "$LOGFILE"
-            echo "Log dosyası başarıyla temizlendi."
+            echo "Log dosyasi basariyla temizlendi."
         else
-        echo "Dosya boyutu normal aralıkta: $FILESIZE"
+        echo "Dosya boyutu normal aralikta: $FILESIZE"
         fi
     else
-        echo "Dosya bulunamadı."
+        echo "Dosya bulunamadi."
     fi
 done
         find $LOGDIR -name "*.tar.gz" -mtime +30 -delete
         echo "30 gunden eski arsivler silindi."
+
+
