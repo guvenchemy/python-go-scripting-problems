@@ -1,0 +1,6 @@
+{"timestamp": "2026-07-03T10:00:00Z", "level": "INFO", "method": "GET", "path": "/api/v1/users", "status": 200, "response_time_ms": 12}
+{"timestamp": "2026-07-03T10:01:05Z", "level": "WARN", "method": "POST", "path": "/api/v1/payments", "status": 400, "response_time_ms": 150}
+{"timestamp": "2026-07-03T10:02:10Z", "level": "ERROR", "method": "GET", "path": "/api/v1/checkout", "status": 500, "response_time_ms": 1200}
+BU SATIR BOZUK BİR JSON VERİSİDİR PARSE EDİLEMEZ
+{"timestamp": "2026-07-03T10:03:15Z", "level": "INFO", "method": "GET", "path": "/api/v1/users", "status": 200, "response_time_ms": 8}
+{"timestamp": "2026-07-03T10:04:20Z", "level": "ERROR", "method": "POST", "path": "/api/v1/payments", "status": 503, "response_time_ms": 3500}
